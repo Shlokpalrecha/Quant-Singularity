@@ -1,0 +1,6 @@
+artifact_location: /kaggle/working/mlruns/450659063212534039
+creation_time: 1778668693348
+experiment_id: '450659063212534039'
+last_update_time: 1778668693348
+lifecycle_stage: active
+name: quant-singularity-finetune

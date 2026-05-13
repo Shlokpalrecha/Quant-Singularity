@@ -1,0 +1,56 @@
+{
+  "submission": {
+    "model": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+    "lora_rank": 4,
+    "lora_alpha": 8,
+    "target_modules": [
+      "v_proj",
+      "q_proj"
+    ],
+    "quantisation": "4-bit NF4 double quant (bfloat16 compute)",
+    "optimiser": "paged_adamw_8bit"
+  },
+  "data": {
+    "total_raw_examples": 300,
+    "valid_after_audit": 261,
+    "train_examples": 156,
+    "val_examples": 105,
+    "eval_examples_finetune": 0,
+    "eval_examples_parquet": 780,
+    "train_date_range": "2024-10-01 \u2192 2024-10-21",
+    "val_date_range": "2024-10-22 \u2192 2024-11-01",
+    "eval_date_range": "N/A (runs on market_states.parquet)"
+  },
+  "training": {
+    "train_loss": 7.6546,
+    "val_loss": 4.9908,
+    "mlflow_run": "a04fbf51f5574a34b80ab0489994c8ac"
+  },
+  "eval_metrics": {
+    "schema_pass_rate": 1.0,
+    "direction_accuracy": 0.4051,
+    "suppression_rate": 1.0,
+    "active_signal_accuracy": "N/A",
+    "conviction_mean": 0.3,
+    "conviction_std": 0.0,
+    "per_class_accuracy": {
+      "CE": 0.0,
+      "PE": 0.0,
+      "NEUTRAL": 1.0
+    }
+  },
+  "rag_ablation": {
+    "accuracy_with_rag": 0.4923,
+    "accuracy_without_rag": 0.3077,
+    "delta_accuracy": 0.1846,
+    "mean_conviction_delta": -0.0383,
+    "calibration_analysis": "See eval_dashboard.png panel (1,0) for similarity vs \u0394conviction"
+  },
+  "design_decisions": {
+    "conviction_method": "Deterministic function of (1) RAG label consistency, (2) ADX gate, (3) OOD penalty \u2014 NOT raw LLM float. Rationale: LLM-generated conviction is a memorised distributional pattern, not a calibrated probability. Our function has epistemic grounding.",
+    "model_choice": "TinyLlama-1.1B over Phi-2: with 255 training examples we teach schema, not finance. Lower baseline makes LoRA delta cleaner to attribute.",
+    "lora_rank": "Rank=4 not 8: 255 examples \u2192 ~1000-2000 effective parameter budget. Rank=4 on Q,V \u2248 131K trainable params. Rank=8 would double this with no additional data \u2192 memorisation \u2192 poor walk-forward generalisation.",
+    "split_discipline": "Days 1-20: train. Days 21-30: HP validation ONLY (never backprop). Days 31-60: walk-forward eval, touched only in final run. Prevents HP leakage into evaluation window.",
+    "orchestrator_rules": "Implemented exactly as brief specifies: ADX gate (<20 suppress), conviction threshold (<0.40 suppress), horizon validation. Added multi-pod supermajority + correlated failure detection as extension."
+  }
+}

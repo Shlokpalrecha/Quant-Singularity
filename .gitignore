@@ -202,6 +202,12 @@ cython_debug/
 # .vscode/
 # Temporary file for partial code execution
 tempCodeRunnerFile.py
+.vscode/
+
+data/*.parquet
+mlflow_artifacts/artifacts/
+*.bin
+*.safetensors
 
 # Ruff stuff:
 .ruff_cache/

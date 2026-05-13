@@ -1,0 +1,15 @@
+artifact_uri: /kaggle/working/mlruns/450659063212534039/cac9468b414e4ef88df16fce1a29089a/artifacts
+end_time: 1778669311798
+entry_point_name: ''
+experiment_id: '450659063212534039'
+lifecycle_stage: active
+run_id: cac9468b414e4ef88df16fce1a29089a
+run_name: tinyllama-lora-rank4
+run_uuid: cac9468b414e4ef88df16fce1a29089a
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1778669300816
+status: 4
+tags: []
+user_id: root

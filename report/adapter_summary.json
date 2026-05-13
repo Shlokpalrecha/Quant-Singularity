@@ -1,0 +1,14 @@
+{
+  "model_id": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+  "lora_rank": 4,
+  "lora_alpha": 8,
+  "target_modules": [
+    "v_proj",
+    "q_proj"
+  ],
+  "train_loss": 7.6546,
+  "val_loss": 4.9908,
+  "train_examples": 156,
+  "val_examples": 105,
+  "mlflow_run_id": "a04fbf51f5574a34b80ab0489994c8ac"
+}
