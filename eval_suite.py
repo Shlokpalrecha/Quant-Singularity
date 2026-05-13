@@ -1,20 +1,3 @@
-"""
-eval_suite.py — Signal Pod Evaluation Suite
-Quant Singularity AI-SLM Screening Project
-
-COMMIT THIS FILE BEFORE ANY TRAINING RUN.
-All thresholds are pre-committed based on data statistics from the training window only.
-No eval window data was used to set these thresholds.
-
-Threshold Rationale (derived from training window inspection):
-- VIX regime boundary: 14.78 (train mean + 1 std = 14.03 + 0.75)
-- ADX suppression threshold: 20 (fixed by orchestrator spec)
-- Conviction downgrade threshold: 0.40 (fixed by orchestrator spec)
-- Directional accuracy floor: 0.45 for non-suppressed signals (above random for 3-class)
-- Schema pass rate floor: 0.95 (production system requirement)
-- Orchestrator suppression rate ceiling: 0.35 (>35% suppression = model not adding value)
-- Max parse failure rate: 0.05
-"""
 
 import json
 import uuid
